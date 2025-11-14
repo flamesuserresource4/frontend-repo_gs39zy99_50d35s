@@ -59,12 +59,38 @@ export function MinimalTemplate({ text, author }) {
   )
 }
 
+// New: Cosmic glassmorphism template with aurora glow and starfield
+export function CosmicTemplate({ text, author }) {
+  return (
+    <div className="relative">
+      <div className="absolute inset-0 -z-10 rounded-3xl overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-fuchsia-500/40 via-indigo-500/30 to-cyan-500/20 blur-2xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.12),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(255,255,255,0.08),transparent_40%),radial-gradient(circle_at_40%_80%,rgba(255,255,255,0.1),transparent_40%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.06),transparent_30%,rgba(255,255,255,0.06)_70%,transparent)]" />
+      </div>
+      <TemplateWrapper className="backdrop-blur-xl bg-white/10 border border-white/20 text-white">
+        <p className="text-2xl sm:text-3xl font-semibold leading-snug tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">“{text}”</p>
+        <p className="mt-6 text-right text-lg text-white/90">— {author || 'Unknown'}</p>
+        <div className="mt-6 flex items-center justify-between text-xs text-white/70">
+          <span className="inline-flex items-center gap-1">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-fuchsia-400 shadow-[0_0_12px_theme(colors.fuchsia.400)]" />
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-indigo-400 shadow-[0_0_12px_theme(colors.indigo.400)]" />
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_12px_theme(colors.cyan.400)]" />
+          </span>
+          <span>cosmic glass</span>
+        </div>
+      </TemplateWrapper>
+    </div>
+  )
+}
+
 export const templateMeta = {
   aurora: { name: 'Aurora' },
   paper: { name: 'Paper' },
   neon: { name: 'Neon' },
   serif: { name: 'Serif' },
   minimal: { name: 'Minimal' },
+  cosmic: { name: 'Cosmic Glass' },
 }
 
 export function QuoteTemplate({ template = 'aurora', text, author }) {
@@ -77,6 +103,8 @@ export function QuoteTemplate({ template = 'aurora', text, author }) {
       return <SerifTemplate text={text} author={author} />
     case 'minimal':
       return <MinimalTemplate text={text} author={author} />
+    case 'cosmic':
+      return <CosmicTemplate text={text} author={author} />
     case 'aurora':
     default:
       return <AuroraTemplate text={text} author={author} />
